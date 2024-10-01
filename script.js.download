@@ -1,0 +1,54 @@
+let balance = 1000;
+
+function showBalance() {
+    document.getElementById('message').innerText = `Your balance is: $${balance}`;
+    hideInputArea();
+}
+
+function showWithdraw() {
+    document.getElementById('message').innerText = "Enter amount to withdraw:";
+    showInputArea();
+    document.getElementById('submitButton').onclick = withdraw;
+}
+
+function showDeposit() {
+    document.getElementById('message').innerText = "Enter amount to deposit:";
+    showInputArea();
+    document.getElementById('submitButton').onclick = deposit;
+}
+
+function showInputArea() {
+    document.getElementById('inputArea').style.display = 'block';
+}
+
+function hideInputArea() {
+    document.getElementById('inputArea').style.display = 'none';
+    document.getElementById('amountInput').value = '';
+}
+
+function withdraw() {
+    const amount = parseFloat(document.getElementById('amountInput').value);
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+        document.getElementById('message').innerText = `You withdrew $${amount}.`;
+    } else {
+        document.getElementById('message').innerText = "Invalid amount!";
+    }
+    hideInputArea();
+}
+
+function deposit() {
+    const amount = parseFloat(document.getElementById('amountInput').value);
+    if (amount > 0) {
+        balance += amount;
+        document.getElementById('message').innerText = `You deposited $${amount}.`;
+    } else {
+        document.getElementById('message').innerText = "Invalid amount!";
+    }
+    hideInputArea();
+}
+
+function cancel() {
+    hideInputArea();
+    document.getElementById('message').innerText = "Transaction cancelled.";
+}
